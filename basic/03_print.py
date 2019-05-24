@@ -10,6 +10,14 @@ print(300,400,sep=",")
 print("#"+"-"*20+"#")
 
 # 2. format 출력
+# format_spec :: = [[ fill] align] [ sign] [#] [0] [ width] [ grouping_option] [. precision] [ type]
+# fill :: = <모든 문자>
+# align :: = "<"| ">"| "="| "^"
+# sign :: = "+"| "-"| ""
+# width :: = digit+ grouping_option :: = "_"| ","
+# precision :: = digit+
+# type :: = "b"| "c"| "d"| "e"| "E"| "f"| "F"| "g"| "G"| "n"| "o"| "s"| "x"| "X"
+
 n = "홍길동"
 a = 20
 print("이름은 "+n+"이고 나이는 "+str(a))
@@ -65,6 +73,40 @@ print(price)
 price = '{0:f},{0:.3f},{0:d},{0:11d}'.format(1234)
 print(price)
 print('{0:f},{0:.3f},{0:d},{0:11d}'.format(1234))
+
+print("#"+"-"*20+"#")
+
+# 16진수
+print("%#0.3x"%255, "%0.3x"%255, "%0.3X"%255)
+# print('{0:#{width}{base}}'.format(16, base='x', width=4))
+print('{0:08x}'.format(16))
+print('{0:#010x}'.format(16))
+print('{0:#011_x}'.format(16))
+
+print("#"+"-"*20+"#")
+
+# 정렬
+print('{:<5}'.format("ABC"))
+print('{:>5}'.format("ABC"))
+print('{:^5}'.format("ABC"))
+
+print('{:<5}'.format(-10))
+print('{:>5}'.format(-10))
+print('{:^5}'.format(-10))
+print('{:=5}'.format(-10))
+
+print('{:}'.format(100))
+print('{:}'.format(-100))
+print('{:+}'.format(100))    # 양수, 음수 모두 부호 표시
+print('{:+}'.format(-100))   # 양수, 음수 모두 부호 표시
+print('{: }'.format(100))    # 양수의 경우 부호 없이 한칸 띄우고, 음수는 부호 표시
+print('{: }'.format(-100))   # 양수의 경우 부호 없이 한칸 띄우고, 음수는 부호 표시
+
+print("#"+"-"*20+"#")
+
+# dict 출력
+person = {"A":"123", "B":"456", "C":"789"}
+print('{p[A]} {p[B]}'.format(p=person))
 
 print("#"+"-"*20+"#")
 

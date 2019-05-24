@@ -274,4 +274,36 @@ a.takeoff()
 a.fly()
 a.land()
 
+print(issubclass(Bird, Flyer))
+print(issubclass(Airplane, Flyer))
+
+print("#"+"-"*20+"#")
+
+# 7. 정적 메소드
+# 클래스의 함수(메소드)를 호출할때는 인스턴스를 통해서 호출하지만
+# 정적 메소드를 사용하면 인스턴스를 통하지 않고 클래스에서 바로 호출할 수 있다.
+# 파이썬 명령중에도 정적 메소드를 사용하는 것들이 있다. (예 set.union(a, b))
+
+class my_class:
+    @staticmethod
+    def add(a,b):   # 정적 메소드는 self 를 받지 않는다. 따라서 다른 속성에도 접근이 안되며 다른 인스턴스 속성이나 메소드가 필요없을때 사용된다.
+        print(a+b)
+
+my_class.add(1,2)
+
+print("#"+"-"*20+"#")
+
+# 8. 클래스 메소드
+# 클래스 메소드 역시 정적 메소드와 같이 인스턴스를 통하지 않고 바로 호출할 수 있다.
+# 다른점은 클래스 메소드는 다른 인스턴스 속성에 접근 할 수 있다.
+
+class my_class:
+    a = 1
+    b = 2
+    @classmethod
+    def add(cls):   # self 를 쓰지 않고 cls 를 사용한다.
+        print(cls.a + cls.b)
+
+my_class.add()
+
 print("#"+"-"*20+"#")

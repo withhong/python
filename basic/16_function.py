@@ -168,10 +168,61 @@ def my_func():
     n = 100  # 지역 변수 (함수안에서만 사용 가능)
     print("전역변수 m 함수안:"+ str(m))
     print("지역변수 n 함수안:"+ str(n))
+    print("전역변수:", globals())
+    print("지역변수:", locals())
 
 my_func()
 print("전역변수 m 함수밖:"+ str(m))
 #print("지역변수 n 함수밖:"+ str(n))   # 지역 변수는 함수밖에서 사용 안됨
+
+print("#"+"-"*20+"#")
+
+# 함수내에서 전역변수 사용하기
+m1 = 10  # 전역 변수 (함수안과밖에서 사용 가능)
+def my_func():
+    m1 = 20      # 전역변수 m1 과는 별개로 지역변수 m1 생성
+    print("전역변수:", globals())
+    print("지역변수:", locals())
+
+my_func()
+
+m2 = 10
+def my_func():
+    global m2
+    m2 = 20  # 전역변수 m2 의 값이 바뀜
+    print("전역변수:", globals())
+    print("지역변수:", locals())
+
+my_func()
+
+print("#"+"-"*20+"#")
+
+# 지역 변수와 함수안의 함수
+# 지역 변수는 항상 현재 함수의 변수가 됨
+def my_func():
+    a = 10
+    def internal_my_func():
+        a = 20
+
+    internal_my_func()
+    print("지역변수 :", a)
+
+my_func()
+
+print("#"+"-"*20+"#")
+
+# 현재 함수 밖의 지역 변수를 변경하고 싶은 경우 'nonlocal' 을 사용
+# 함수가 한번만 겹치는게 아니라 여러번 겹치며 같은 이름의 변수가 계속 사용된다면 가장 가까운 변수를 찾게 된다.
+def my_func():
+    a = 10
+    def internal_my_func():
+        nonlocal a
+        a = 20
+
+    internal_my_func()
+    print("지역변수 :", a)
+
+my_func()
 
 print("#"+"-"*20+"#")
 
@@ -256,4 +307,43 @@ def my_func(x, y, **n):
 
 my_func(10, 20, name="홍길동", age="20")  # key:value 쌍으로 dict 로 packing
 
+def my_func(**kwargs):
+    for kw, args in kwargs.items():
+        print(kw, args)
+
+my_func(name="홍길동", age="20")
+
 print("#"+"-"*20+"#")
+
+# 10. 클로저
+def my_func():
+    a = 1
+    b = 2
+    def intenal_my_func(x):
+        return a + b + x
+    return intenal_my_func
+
+aa = my_func()
+print("클로저:", aa(1), aa(2), aa(3))  # 함수에 있는 a, b 값이 그대로 사용됨
+
+# 클로저와 내부 변수를 이용하여 함수 내부에 값을 저장하고 호출될때 사용할 수 있다.
+def my_func():
+    a = 1
+    b = 2
+    sum_val = 0
+    def intenal_my_func(x):
+        nonlocal sum_val
+        sum_val = sum_val + a + b +x
+        print("클로저:", sum_val)
+    return intenal_my_func
+
+aa = my_func()
+aa(1)
+aa(2)
+aa(3)
+
+print("#"+"-"*20+"#")
+
+
+
+

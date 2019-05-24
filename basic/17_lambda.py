@@ -55,4 +55,11 @@ my_func_1(10,"홍",20, name="홍길동", age=20)
 my_func_2 = lambda n1, *n2, **n3: print(n1,n2,n3)
 my_func_2(10,"홍",20, name="홍길동", age=20)
 
+# 6. 예제
+m = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+print(list(map(lambda x: str(x) if x % 2 == 0 else x, m)))
+
+m = ["0-000", "1-001", "2-002"]
+print(list(map(lambda a : "{0:03d}-{1}".format(int(a.split('-')[0]),a.split('-')[1]), m)))
+
 print("#"+"-"*20+"#")
